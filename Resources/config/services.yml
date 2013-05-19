@@ -1,4 +1,9 @@
 services:
-    seyon_phpbb3_admin_reader:
+    seyon_phpbb3_reader:
         class:        Seyon\PHPBB3\AdminBundle\Service\Reader
-        arguments:    [container]
+        arguments:    ['@doctrine.orm.entity_manager', '@service_container', '@security.context']
+    seyon_phpbb3_twig_reader:
+        class: Seyon\PHPBB3\AdminBundle\Twig\ReaderExtension
+        arguments: ["@service_container"]
+        tags:
+            - { name: twig.extension }
