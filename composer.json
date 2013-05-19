@@ -16,7 +16,7 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "2.2.*@dev",
-        "seyon/phpbb3-user-bundle": "dev-master",
+        "seyon/phpbb3-user-bundle": "dev-master"
     },
     "autoload": {
         "psr-0": { "Seyon\\PHPBB3\\AdminBundle": "" }
