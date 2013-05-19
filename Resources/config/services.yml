@@ -1,0 +1,4 @@
+services:
+    seyon_phpbb3_admin_reader:
+        class:        Seyon\PHPBB3\AdminBundle\Service\Reader
+        arguments:    [container]
