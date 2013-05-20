@@ -7,3 +7,8 @@ services:
         arguments: ["@service_container"]
         tags:
             - { name: twig.extension }
+    seyon_phpbb3_table_prefix:
+        class: Seyon\PHPBB3\AdminBundle\EventListener\DoctrineNameListener
+        arguments: ["@service_container"]
+        tags:
+            - { name: doctrine.event_listener, event: name, connection: seyon_phpbb3 }

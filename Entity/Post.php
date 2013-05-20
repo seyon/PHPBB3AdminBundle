@@ -2,75 +2,145 @@
 
 namespace Seyon\PHPBB3\AdminBundle\Entity;
 
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="posts")
+ */
 class Post {
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $em;
-    protected $container;
-    protected $securityContext;
-    protected $data = array();
+    protected $post_id;
 
+    /**
+     * @ORM\Column(type="integer", length=8, options={"default":0}, nullable=false)
+     */
+    protected $topic_id = 0;
 
-    public function __construct($data, $em, $container, $securityContext) {
-        $this->data = $data;
-        $this->em = $em;
-        $this->container = $container;
-        $this->securityContext = $securityContext;
-    }
-    
-    public function get($name){
-        return $this->data[$name];
-    }
+    /**
+     * @ORM\Column(type="integer", length=8, options={"default":0}, nullable=false)
+     */
+    protected $forum_id = 0;
 
+    /**
+     * @ORM\Column(type="integer", length=8, options={"default":0}, nullable=false)
+     */
+    protected $poster_id = 0;
 
-    public function checkAccess(){
-        
-        $config = $this->container->getParameter('seyon_phpbb3_admin');
-        $prefix = $config['table_prefix'];
+    /**
+     * @ORM\Column(type="integer", length=8, options={"default":0}, nullable=false)
+     */
+    protected $icon_id = 0;
 
-        
-        $forum = $this->get('forum_id');
-        
-        $query = " SELECT * FROM `".$prefix."acl_groups` WHERE forum_id = ? GROUP BY `group_id`";
-        $stmt = $this->em->getConnection()->prepare($query);
-        $stmt->bindParam(1, $forum, \PDO::PARAM_INT);
-        $stmt->execute();
-        $results = $stmt->fetchAll();
+    /**
+     * @ORM\Column(type="string", length=40, nullable=false)
+     */
+    protected $poster_ip = '';
 
-        foreach($results as $result){
-            
-            // check if the forum/group combination has an acl role with "read" access
-            $query = " SELECT * FROM `".$prefix."acl_roles_data` WHERE role_id = ? AND `auth_option_id` = 20";
-            $stmt = $this->em->getConnection()->prepare($query);
-            $stmt->bindParam(1, $result['auth_role_id'], \PDO::PARAM_INT);
-            $stmt->execute();
-            $acls = $stmt->fetchAll();
-            
-            if(!empty($acls)){
-                // search the group
-                $query = " SELECT * FROM `".$prefix."groups` WHERE group_id = ?";
-                $stmt = $this->em->getConnection()->prepare($query);
-                $stmt->bindParam(1, $result['group_id'], \PDO::PARAM_INT);
-                $stmt->execute();
-                $group = $stmt->fetchAll();
+    /**
+     * @ORM\Column(type="integer", length=11, options={"default":0}, nullable=false)
+     */
+    protected $post_time = 0;
 
-                if(!empty($group)){
-                    $group = reset($group);
-                    $group = $group['group_name'];
-                    $group = strtoupper($group);
-                    // check group access
-                    if (true === $this->securityContext->isGranted('ROLE_PHPBB3_'.$group) || $group == 'GUESTS') {
-                        return true;
-                    }
-                }
-            }
-            
-            
-        }
-        
-        return false;
-    }
+    /**
+     * @ORM\Column(type="SmallInt", length=1, options={"default":1}, nullable=false)
+     */
+    protected $post_approved = 1;
+
+    /**
+     * @ORM\Column(type="SmallInt", length=1, options={"default":0}, nullable=false)
+     */
+    protected $post_reported = 0;
+
+    /**
+     * @ORM\Column(type="SmallInt", length=1, options={"default":1}, nullable=false)
+     */
+    protected $enable_bbcode = 1;
+
+    /**
+     * @ORM\Column(type="SmallInt", length=1, options={"default":1}, nullable=false)
+     */
+    protected $enable_smilies = 1;
+
+    /**
+     * @ORM\Column(type="SmallInt", length=1, options={"default":1}, nullable=false)
+     */
+    protected $enable_magic_url= 1;
+
+    /**
+     * @ORM\Column(type="SmallInt", length=1, options={"default":1}, nullable=false)
+     */
+    protected $enable_sig= 1;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    protected $post_username = '';
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    protected $post_subject = '';
+
+    /**
+     * @ORM\Column(type="text", nullable=false)
+     */
+    protected $post_text = '';
+
+    /**
+     * @ORM\Column(type="string", length=32, nullable=false)
+     */
+    protected $post_checksum = '';
+
+    /**
+     * @ORM\Column(type="SmallInt", length=1, options={"default":0}, nullable=false)
+     */
+    protected $post_attachment = 0;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    protected $bbcode_bitfield = '';
+
+    /**
+     * @ORM\Column(type="integer", length=8, nullable=false)
+     */
+    protected $bbcode_uid = '';
+
+    /**
+     * @ORM\Column(type="SmallInt", length=1, options={"default":1}, nullable=false)
+     */
+    protected $post_postcount = 1;
+
+    /**
+     * @ORM\Column(type="integer", length=11, options={"default":0}, nullable=false)
+     */
+    protected $post_edit_time = 0;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    protected $post_edit_reason = '';
+
+    /**
+     * @ORM\Column(type="integer", length=8, options={"default":0}, nullable=false)
+     */
+    protected $post_edit_user = 0;
+
+    /**
+     * @ORM\Column(type="SmallInt", length=4, options={"default":0}, nullable=false)
+     */
+    protected $post_edit_count = 0;
+
+    /**
+     * @ORM\Column(type="SmallInt", length=1, options={"default":0}, nullable=false)
+     */
+    protected $post_edit_locked = 0;
     
 }
