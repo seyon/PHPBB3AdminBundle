@@ -1,2 +1,11 @@
 seyon_phpbb3_admin:
   table_prefix: phpbb_
+  
+doctrine:
+    orm:
+        default_entity_manager:   default
+        entity_managers:
+            seyon_phpbb3:
+                connection:       default
+                mappings:
+                    SeyonPHPBB3AdminBundle: ~
