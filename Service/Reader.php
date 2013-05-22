@@ -83,7 +83,7 @@ class Reader {
         
         $posts = array();
         foreach($results as $result){
-            $posts[] = new \Seyon\PHPBB3\AdminBundle\Entity\Post($result, $this->em, $this->container, $this->securityContext);
+            $posts[] = new \Seyon\PHPBB3\AdminBundle\Entity\Helper\Post($result, $this->em, $this->container, $this->securityContext);
         }
         
         return $posts;
