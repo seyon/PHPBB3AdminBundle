@@ -11,4 +11,4 @@ services:
         class: Seyon\PHPBB3\AdminBundle\EventListener\DoctrineNameListener
         arguments: ["@service_container"]
         tags:
-            - { name: doctrine.event_listener, event: name, connection: seyon_phpbb3 }
+            - { name: doctrine.event_listener, event: name, entity_manager: seyon_phpbb3 }
