@@ -10,20 +10,18 @@ class Post {
     protected $em;
     protected $container;
     protected $securityContext;
-    protected $data = array();
+    /**
+     * @var \Seyon\PHPBB3\AdminBundle\Entity\Post 
+     */
+    protected $entity;
 
 
-    public function __construct($data, $em, $container, $securityContext) {
-        $this->data = $data;
+    public function __construct(\Seyon\PHPBB3\AdminBundle\Entity\Post $post, $em, $container, $securityContext) {
+        $this->entity = $post;
         $this->em = $em;
         $this->container = $container;
         $this->securityContext = $securityContext;
     }
-    
-    public function get($name){
-        return $this->data[$name];
-    }
-
 
     public function checkAccess(){
         
@@ -31,7 +29,7 @@ class Post {
         $prefix = $config['table_prefix'];
 
         
-        $forum = $this->get('forum_id');
+        $forum = $this->entity->forum_id;
         
         $query = " SELECT * FROM `".$prefix."acl_groups` WHERE forum_id = ? GROUP BY `group_id`";
         $stmt = $this->em->getConnection()->prepare($query);

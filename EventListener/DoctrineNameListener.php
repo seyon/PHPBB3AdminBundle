@@ -16,10 +16,12 @@ class DoctrineNameListener
         $this->prefix   = $config['table_prefix'];
     }
     
-    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
+    public function loadClassMetadata(\Doctrine\ORM\Event\LoadClassMetadataEventArgs $eventArgs)
     {
         $classMetadata = $eventArgs->getClassMetadata();
+        $em = $eventArgs->getEntityManager();
         $classMetadata->setTableName($this->prefix . $classMetadata->getTableName());
+
         foreach ($classMetadata->getAssociationMappings() as $fieldName => $mapping) {
             if ($mapping['type'] == \Doctrine\ORM\Mapping\ClassMetadataInfo::MANY_TO_MANY) {
                 $mappedTableName = $classMetadata->associationMappings[$fieldName]['joinTable']['name'];

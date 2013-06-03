@@ -1,14 +1,14 @@
 services:
+    seyon_phpbb3_table_prefix:
+        class: Seyon\PHPBB3\AdminBundle\EventListener\DoctrineNameListener
+        arguments: ['@service_container']
+        tags:
+            - { name: doctrine.event_listener, event: loadClassMetadata, connection: seyon_phpbb3 }
     seyon_phpbb3_reader:
         class:        Seyon\PHPBB3\AdminBundle\Service\Reader
-        arguments:    ['@doctrine.orm.entity_manager', '@service_container', '@security.context']
+        arguments:    ['@doctrine.orm.seyon_phpbb3_entity_manager', '@service_container', '@security.context']
     seyon_phpbb3_twig_reader:
         class: Seyon\PHPBB3\AdminBundle\Twig\ReaderExtension
         arguments: ["@service_container"]
         tags:
             - { name: twig.extension }
-    seyon_phpbb3_table_prefix:
-        class: Seyon\PHPBB3\AdminBundle\EventListener\DoctrineNameListener
-        arguments: ["@service_container"]
-        tags:
-            - { name: doctrine.event_listener, event: name, entity_manager: seyon_phpbb3 }

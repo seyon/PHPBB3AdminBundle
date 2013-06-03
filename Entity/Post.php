@@ -16,131 +16,131 @@ class Post {
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $post_id;
+    public $post_id;
 
     /**
      * @ORM\Column(type="integer", length=8, options={"default":0}, nullable=false)
      */
-    protected $topic_id = 0;
+    public $topic_id = 0;
 
     /**
      * @ORM\Column(type="integer", length=8, options={"default":0}, nullable=false)
      */
-    protected $forum_id = 0;
+    public $forum_id = 0;
 
     /**
      * @ORM\Column(type="integer", length=8, options={"default":0}, nullable=false)
      */
-    protected $poster_id = 0;
+    public $poster_id = 0;
 
     /**
      * @ORM\Column(type="integer", length=8, options={"default":0}, nullable=false)
      */
-    protected $icon_id = 0;
+    public $icon_id = 0;
 
     /**
      * @ORM\Column(type="string", length=40, nullable=false)
      */
-    protected $poster_ip = '';
+    public $poster_ip = '';
 
     /**
      * @ORM\Column(type="integer", length=11, options={"default":0}, nullable=false)
      */
-    protected $post_time = 0;
+    public $post_time = 0;
 
     /**
-     * @ORM\Column(type="SmallInt", length=1, options={"default":1}, nullable=false)
+     * @ORM\Column(type="integer", length=1, options={"default":1}, nullable=false)
      */
-    protected $post_approved = 1;
+    public $post_approved = 1;
 
     /**
-     * @ORM\Column(type="SmallInt", length=1, options={"default":0}, nullable=false)
+     * @ORM\Column(type="integer", length=1, options={"default":0}, nullable=false)
      */
-    protected $post_reported = 0;
+    public $post_reported = 0;
 
     /**
-     * @ORM\Column(type="SmallInt", length=1, options={"default":1}, nullable=false)
+     * @ORM\Column(type="integer", length=1, options={"default":1}, nullable=false)
      */
-    protected $enable_bbcode = 1;
+    public $enable_bbcode = 1;
 
     /**
-     * @ORM\Column(type="SmallInt", length=1, options={"default":1}, nullable=false)
+     * @ORM\Column(type="integer", length=1, options={"default":1}, nullable=false)
      */
-    protected $enable_smilies = 1;
+    public $enable_smilies = 1;
 
     /**
-     * @ORM\Column(type="SmallInt", length=1, options={"default":1}, nullable=false)
+     * @ORM\Column(type="integer", length=1, options={"default":1}, nullable=false)
      */
-    protected $enable_magic_url= 1;
+    public $enable_magic_url= 1;
 
     /**
-     * @ORM\Column(type="SmallInt", length=1, options={"default":1}, nullable=false)
+     * @ORM\Column(type="integer", length=1, options={"default":1}, nullable=false)
      */
-    protected $enable_sig= 1;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     */
-    protected $post_username = '';
+    public $enable_sig= 1;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    protected $post_subject = '';
+    public $post_username = '';
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    public $post_subject = '';
 
     /**
      * @ORM\Column(type="text", nullable=false)
      */
-    protected $post_text = '';
+    public $post_text = '';
 
     /**
      * @ORM\Column(type="string", length=32, nullable=false)
      */
-    protected $post_checksum = '';
+    public $post_checksum = '';
 
     /**
-     * @ORM\Column(type="SmallInt", length=1, options={"default":0}, nullable=false)
+     * @ORM\Column(type="integer", length=1, options={"default":0}, nullable=false)
      */
-    protected $post_attachment = 0;
+    public $post_attachment = 0;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    protected $bbcode_bitfield = '';
+    public $bbcode_bitfield = '';
 
     /**
      * @ORM\Column(type="integer", length=8, nullable=false)
      */
-    protected $bbcode_uid = '';
+    public $bbcode_uid = '';
 
     /**
-     * @ORM\Column(type="SmallInt", length=1, options={"default":1}, nullable=false)
+     * @ORM\Column(type="integer", length=1, options={"default":1}, nullable=false)
      */
-    protected $post_postcount = 1;
+    public $post_postcount = 1;
 
     /**
      * @ORM\Column(type="integer", length=11, options={"default":0}, nullable=false)
      */
-    protected $post_edit_time = 0;
+    public $post_edit_time = 0;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    protected $post_edit_reason = '';
+    public $post_edit_reason = '';
 
     /**
      * @ORM\Column(type="integer", length=8, options={"default":0}, nullable=false)
      */
-    protected $post_edit_user = 0;
+    public $post_edit_user = 0;
 
     /**
-     * @ORM\Column(type="SmallInt", length=4, options={"default":0}, nullable=false)
+     * @ORM\Column(type="integer", length=4, options={"default":0}, nullable=false)
      */
-    protected $post_edit_count = 0;
+    public $post_edit_count = 0;
 
     /**
-     * @ORM\Column(type="SmallInt", length=1, options={"default":0}, nullable=false)
+     * @ORM\Column(type="integer", length=1, options={"default":0}, nullable=false)
      */
-    protected $post_edit_locked = 0;
+    public $post_edit_locked = 0;
     
 }

@@ -35,58 +35,22 @@ class Reader {
         $where = array();
         
         if($forum > 0){
-            $where[] = ' `forum_id` = ? ';
+            $where['forum_id'] = $forum;
         }
         
         if($topic > 0){
-            $where[] = ' `topic_id` = ? ';
+            $where['topic_id'] = $topic;
         }
         
-        if(!empty($where)){
-            $where = ' WHERE '.implode(' AND ', $where);
-        } else {
-            $where = '';
-        }
+        $repo       = $this->em->getRepository('SeyonPHPBB3AdminBundle:Post');
+        $results    = $repo->findBy($where, array('post_time' => 'DESC'), $limit);
         
-        $query = 'SELECT 
-                        *
-                    FROM 
-                        `'.$prefix.'posts` 
-                    '.$where.'
-                    ORDER BY 
-                        `post_time` DESC 
-                    ';
-        
-        
-        if($limit > 0){
-            $query .= ' LIMIT ?';
-        }
+        return $results;
+    }
     
-        $stmt = $this->em->getConnection()->prepare($query);
-        
-        $i = 1;
-        if($forum > 0){
-            $stmt->bindParam($i, $forum, \PDO::PARAM_INT);
-            $i++;
-        }
-        if($topic > 0){
-            $stmt->bindParam($i, $topic, \PDO::PARAM_INT);
-            $i++;
-        }
-        if($limit > 0){
-            $stmt->bindParam($i, $limit, \PDO::PARAM_INT);
-            $i++;
-        }
-
-        $stmt->execute();
-        $results = $stmt->fetchAll();
-        
-        $posts = array();
-        foreach($results as $result){
-            $posts[] = new \Seyon\PHPBB3\AdminBundle\Entity\Helper\Post($result, $this->em, $this->container, $this->securityContext);
-        }
-        
-        return $posts;
+    public function checkReadAccess($post){
+        $helper = new \Seyon\PHPBB3\AdminBundle\Entity\Helper\Post($post, $this->em, $this->container, $this->securityContext);
+        return $helper->checkAccess();
     }
     
     /**
