@@ -14,12 +14,19 @@ class Reader {
 
     protected $securityContext;
 
-    public function __construct($em, $container, $securityContext) {
-
-        $this->container        = $container;
+    
+    public function setEM($em){
         $this->em               = $em;
+    }
+    
+    public function setContainer($container){
+        $this->container        = $container;
+    }
+    
+    public function setSecurity($securityContext){
         $this->securityContext  = $securityContext;
     }
+
     
     /**
      * create Query and get all Posts

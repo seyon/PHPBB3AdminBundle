@@ -7,10 +7,11 @@ class ReaderExtension extends \Twig_Extension
     
     protected $container;
 
-    public function __construct($conatiner) {
+
+    public function setContainer($conatiner){
         $this->container = $conatiner;
     }
-    
+
     public function getFunctions() {
         return array(
             new \Twig_SimpleFunction('getPHPBB3Posts', array($this, 'getPosts')),
