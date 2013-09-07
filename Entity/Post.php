@@ -145,7 +145,7 @@ class Post {
     
     
     public function getId(){
-        return $this->post_id;
+        return $this->id;
     }
     
     public function getTopicId(){
@@ -236,9 +236,13 @@ class Post {
         return $this->username;
     }
     
+    public function getSubject(){
+        return $this->subject;
+    }
+    
     public function getTime(){
-        $time = $this->time;
-        $time = new \DateTime($time);
+        $time = new \DateTime();
+        $time->setTimestamp($this->time);
         return $time;
     }
     
@@ -272,6 +276,14 @@ class Post {
     
     public function setText($value){
         $this->text = $value;
+    }
+    
+    public function getTextWithoutBBCode(){
+        $text = $this->getText();
+        $text = preg_replace('/\[.*\]/', '', $text);
+        $text = preg_replace('/\[\/.*\]/', '', $text);
+        trim($text);
+        return $text;
     }
 
 }

@@ -50,7 +50,7 @@ class Reader {
         }
         
         $repo       = $this->em->getRepository('SeyonPHPBB3AdminBundle:Post');
-        $results    = $repo->findBy($where, array('post_time' => 'DESC'), $limit);
+        $results    = $repo->findBy($where, array('time' => 'DESC'), $limit);
         
         return $results;
     }
