@@ -35,12 +35,14 @@ class Writer {
         $em->flush();
         
         $post                   = new \Seyon\PHPBB3\AdminBundle\Entity\Post();
-        $post->topic_id         = $topic->topic_id;
-        $post->forum_id         = $forum->forum_id;
-        $post->poster_id        = $user->getId();
-        $post->post_time        = $date;
-        $post->post_subject     = $subject;
-        $post->post_text        = $text;
+        $post->setTopicId($topic->topic_id);
+        $post->setForumId($forum->forum_id);
+        $post->setPosterId($user->getId());
+        $post->setTime($date);
+        $post->setSubject($subject);
+        $post->setText($text);
+        
+        
         $em->persist($post);
         $em->flush();
         

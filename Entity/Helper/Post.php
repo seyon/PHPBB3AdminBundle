@@ -31,7 +31,7 @@ class Post {
         $prefix = $config['table_prefix'];
 
         
-        $forum = $this->entity->forum_id;
+        $forum = $this->entity->getForumId();
         
         $query = " SELECT * FROM `".$prefix."acl_groups` WHERE forum_id = ? GROUP BY `group_id`";
         $stmt = $this->em->getConnection()->prepare($query);
