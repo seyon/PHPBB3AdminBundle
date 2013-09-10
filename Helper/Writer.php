@@ -46,8 +46,8 @@ class Writer {
         $em->persist($post);
         $em->flush();
         
-        $topic->topic_first_post_id     = $post->post_id;
-        $topic->topic_last_post_id      = $post->post_id;
+        $topic->topic_first_post_id     = $post->getId();
+        $topic->topic_last_post_id      = $post->getId();
         $topic->topic_last_poster_id    = $user->getId();
         $topic->topic_last_post_time    = $date;
         $topic->topic_last_post_subject = $subject;
@@ -55,7 +55,7 @@ class Writer {
         
         // set forum last post information
         if($date > $forum->forum_last_post_time){
-            $forum->forum_last_post_id          = $post->post_id;
+            $forum->forum_last_post_id          = $post->getId();
             $forum->forum_last_post_subject     = $subject;
             $forum->forum_last_post_time        = $date;
             $forum->forum_last_poster_id        = $user->getId();
