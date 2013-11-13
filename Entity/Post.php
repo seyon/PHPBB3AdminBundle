@@ -6,8 +6,8 @@ namespace Seyon\PHPBB3\AdminBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="posts")
+ * @ORM\Entity(repositoryClass="Seyon\PHPBB3\AdminBundle\Entity\PostRepository")
+ * @ORM\Table(name="posts") 
  */
 class Post {
 

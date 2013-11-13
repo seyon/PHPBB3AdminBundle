@@ -60,6 +60,14 @@ class Reader {
         return $helper->checkAccess();
     }
     
+    public function findPostsByForum($forum, $limit){
+        
+        $repo       = $this->em->getRepository('SeyonPHPBB3AdminBundle:Post');
+        $results    = $repo->findPostsByForum($forum, $limit);
+        
+        return $results;
+    }
+    
     /**
      * get all posts by topic id
      * @param integer $topic
