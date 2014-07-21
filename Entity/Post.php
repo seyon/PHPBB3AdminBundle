@@ -109,7 +109,7 @@ class Post {
     protected $bbcode_bitfield = '';
 
     /**
-     * @ORM\Column(type="integer", length=8, nullable=false)
+     * @ORM\Column(type="string", length=8, nullable=false)
      */
     protected $bbcode_uid = '';
 
